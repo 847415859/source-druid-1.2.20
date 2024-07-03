@@ -1,0 +1,46 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      druid:
+#        keep-alive: true
+        initial-size: 0
+        min-idle: 5
+        max-active: 50
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        time-between-log-stats-millis: 30000
+
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+        username: root
+        password: 132714
+
+        filter:
+          stat:
+            # 开启慢sql监控
+            enabled: true
+            # 慢sql时间阈值（默认3s)
+            slow-sql-millis: 10
+            # 是否合并相同sql
+            merge-sql: true
+            # 数据库类型
+            db-type: mysql
+            # 慢sql日志输出
+            log-slow-sql: true
+            # 慢sql日志等级 默认 ERROR
+            slow-sql-log-level: ERROR
+            # 连接堆栈跟踪启用
+            connection-stack-trace-enable: true
+        filters: stat
+
